@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-ink-900 antialiased;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark body {
+  @apply bg-ink-900 text-slate-100;
+}
+
+/* Respect both the in-app reduced-motion setting and the OS preference. */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* High-contrast accessibility mode bumps borders + text weight. */
+.high-contrast {
+  --tw-ring-offset-width: 0;
+}
+.high-contrast .glass {
+  @apply border-2;
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+  .dark .glass {
+    @apply border-white/10 bg-white/[0.04];
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-400 focus-visible:ring-offset-2
+      focus-visible:ring-offset-ink-900 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-nebula-500 to-magenta-500 text-white shadow-glow hover:brightness-110 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn bg-white/5 text-slate-100 hover:bg-white/10;
+  }
+  .btn-outline {
+    @apply btn border border-white/15 text-slate-100 hover:bg-white/5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-xl;
+  }
+}
+
+/* Custom scrollbar for a more polished feel. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/10;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}
+
+/* Gradient text helper */
+.text-gradient {
+  @apply bg-gradient-to-r from-nebula-300 via-magenta-400 to-aurora-400 bg-clip-text text-transparent;
+}

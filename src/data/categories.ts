@@ -1,0 +1,206 @@
+import type { Category, GameMode } from '@/types';
+
+export const CATEGORIES: Category[] = [
+  {
+    id: 'science',
+    name: 'Science',
+    blurb: 'Atoms, orbits, cells & big ideas.',
+    glyph: '🧪',
+    color: ['#22d3ee', '#0891b2'],
+    accent: '#22d3ee',
+  },
+  {
+    id: 'history',
+    name: 'History',
+    blurb: 'Empires, revolutions & turning points.',
+    glyph: '🏛️',
+    color: ['#f59e0b', '#b45309'],
+    accent: '#f59e0b',
+  },
+  {
+    id: 'geography',
+    name: 'Geography',
+    blurb: 'Capitals, rivers, peaks & borders.',
+    glyph: '🧭',
+    color: ['#34d399', '#059669'],
+    accent: '#34d399',
+  },
+  {
+    id: 'sports',
+    name: 'Sports',
+    blurb: 'Courts, pitches, rings & records.',
+    glyph: '🏆',
+    color: ['#fb7185', '#e11d48'],
+    accent: '#fb7185',
+  },
+  {
+    id: 'entertainment',
+    name: 'Entertainment',
+    blurb: 'Pop culture across every screen.',
+    glyph: '🎬',
+    color: ['#e879f9', '#c026d3'],
+    accent: '#e879f9',
+  },
+  {
+    id: 'flags',
+    name: 'Flags',
+    blurb: 'Banners of the world, decoded.',
+    glyph: '🚩',
+    color: ['#818cf8', '#4f46e5'],
+    accent: '#818cf8',
+  },
+  {
+    id: 'music',
+    name: 'Music',
+    blurb: 'From symphonies to streaming hits.',
+    glyph: '🎵',
+    color: ['#f472b6', '#db2777'],
+    accent: '#f472b6',
+  },
+  {
+    id: 'movies-tv',
+    name: 'Movies & TV',
+    blurb: 'Blockbusters, classics & binge-worthy series.',
+    glyph: '🍿',
+    color: ['#fbbf24', '#d97706'],
+    accent: '#fbbf24',
+  },
+  {
+    id: 'video-games',
+    name: 'Video Games',
+    blurb: 'Consoles, classics & esports.',
+    glyph: '🎮',
+    color: ['#4ade80', '#16a34a'],
+    accent: '#4ade80',
+  },
+  {
+    id: 'literature',
+    name: 'Literature',
+    blurb: 'Novels, poets & literary lore.',
+    glyph: '📚',
+    color: ['#c084fc', '#9333ea'],
+    accent: '#c084fc',
+  },
+  {
+    id: 'technology',
+    name: 'Technology',
+    blurb: 'Code, chips, networks & the web.',
+    glyph: '💻',
+    color: ['#38bdf8', '#0284c7'],
+    accent: '#38bdf8',
+  },
+  {
+    id: 'food-culture',
+    name: 'Food & Culture',
+    blurb: 'Cuisine, customs & festivals.',
+    glyph: '🍜',
+    color: ['#fb923c', '#ea580c'],
+    accent: '#fb923c',
+  },
+  {
+    id: 'world-records',
+    name: 'World Records',
+    blurb: 'Biggest, fastest, oldest, tallest.',
+    glyph: '📏',
+    color: ['#2dd4bf', '#0d9488'],
+    accent: '#2dd4bf',
+  },
+  {
+    id: 'general',
+    name: 'General Knowledge',
+    blurb: 'A bit of everything.',
+    glyph: '💡',
+    color: ['#a5b4fc', '#6366f1'],
+    accent: '#a5b4fc',
+  },
+];
+
+export const CATEGORY_MAP: Record<string, Category> = Object.fromEntries(
+  CATEGORIES.map((c) => [c.id, c]),
+);
+
+export function getCategory(id: string): Category | undefined {
+  return CATEGORY_MAP[id];
+}
+
+export const GAME_MODES: GameMode[] = [
+  {
+    id: 'classic',
+    name: 'Classic Run',
+    blurb: 'Pick a category, answer 10 questions.',
+    glyph: '🎯',
+    requiresCategory: true,
+    questionCount: 10,
+  },
+  {
+    id: 'category-clash',
+    name: 'Category Clash',
+    blurb: 'One question from every category.',
+    glyph: '⚔️',
+    requiresCategory: false,
+    questionCount: 0,
+  },
+  {
+    id: 'survival',
+    name: 'Survival',
+    blurb: 'Keep going until 3 wrong answers.',
+    glyph: '❤️',
+    requiresCategory: false,
+    questionCount: 0,
+    lives: 3,
+  },
+  {
+    id: 'timed-rush',
+    name: 'Timed Rush',
+    blurb: 'As many as you can in 60 seconds.',
+    glyph: '⏱️',
+    requiresCategory: false,
+    questionCount: 0,
+    timeLimitSeconds: 60,
+  },
+  {
+    id: 'streak',
+    name: 'Streak Challenge',
+    blurb: 'How long can you stay perfect?',
+    glyph: '🔥',
+    requiresCategory: false,
+    questionCount: 0,
+    lives: 1,
+  },
+  {
+    id: 'daily',
+    name: 'Daily Challenge',
+    blurb: 'Same 7 questions for everyone, every day.',
+    glyph: '📅',
+    requiresCategory: false,
+    questionCount: 7,
+  },
+  {
+    id: 'flag-frenzy',
+    name: 'Flag Frenzy',
+    blurb: 'Flag identification only.',
+    glyph: '🚩',
+    requiresCategory: false,
+    questionCount: 12,
+  },
+  {
+    id: 'mixed-madness',
+    name: 'Mixed Madness',
+    blurb: 'Randomized categories, anti-repeat filtered.',
+    glyph: '🌀',
+    requiresCategory: false,
+    questionCount: 15,
+  },
+  {
+    id: 'final-boss',
+    name: 'Final Boss',
+    blurb: 'Five brutal expert questions. No mercy.',
+    glyph: '👾',
+    requiresCategory: false,
+    questionCount: 5,
+  },
+];
+
+export const GAME_MODE_MAP: Record<string, GameMode> = Object.fromEntries(
+  GAME_MODES.map((m) => [m.id, m]),
+);
