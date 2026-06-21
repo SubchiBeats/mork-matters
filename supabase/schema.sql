@@ -138,3 +138,29 @@ alter table public.daily_challenges enable row level security;
 drop policy if exists "Daily challenges are viewable by everyone" on public.daily_challenges;
 create policy "Daily challenges are viewable by everyone"
   on public.daily_challenges for select using (true);
+
+-- ---------------------------------------------------------------------------
+-- Role grants
+-- Tables created via the dashboard get these automatically; tables created via
+-- raw SQL do not, so we grant them explicitly. Row-level security (enabled
+-- above) still governs which rows each role can actually see or modify — these
+-- grants only make the tables reachable by the API roles.
+-- ---------------------------------------------------------------------------
+grant usage on schema public to anon, authenticated;
+
+-- Public, RLS-gated read access (anon can only see rows allowed by policy).
+grant select on
+  public.profiles,
+  public.user_stats,
+  public.answered_questions,
+  public.leaderboard_scores,
+  public.daily_challenges
+to anon, authenticated;
+
+-- Signed-in users may write; RLS restricts them to their own rows.
+grant insert, update, delete on
+  public.profiles,
+  public.user_stats,
+  public.answered_questions,
+  public.leaderboard_scores
+to authenticated;
